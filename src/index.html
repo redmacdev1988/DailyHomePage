@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+        <title>My Home Page</title>
+        <link rel="stylesheet" href="css/style.css" > 
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
+        <script type="module">
+            import Carousel from './js/modules/Carousel.js'; 
+            import Weather from './js/modules/Weather.js'; 
+            import Corona from './js/modules/CoronaCases.js'; 
+        </script>
+
+    </head>
+    <body style="font-family: Arial;border: 0 none;">
+        <script src="./js/modules/gsap.min.js"></script>
+
+        <div id="Carousel">
+            <div id='MyWeather'>
+                <div id='weather'>
+                    <b id="location"></b>
+                    <span id="temp"></span>
+                    <span id="description"></span>
+                </div>
+            </div>
+            <span id='coronaBtn' style='display: none'>
+                <img src='./img/virus.png' />
+            </span>
+            <div id="CoronaVirusStats">
+                <div id='sortContent'> 
+                    <div id='sortButtons'>
+                        <ul>
+                        <li><span id='sortText'>Sort by:</span></li>
+                        <li><button id='cases' type="button" class="btn">cases</button></li>
+                        <li><button id='deaths' type="button" class="btn">deaths</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="slider"></div>
+            <div id="arrow-right" class="arrow"></div>
+        </div>
+    </body>
+</html>
