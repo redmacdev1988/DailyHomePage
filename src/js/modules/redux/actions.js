@@ -15,3 +15,10 @@ export const questionAnswer = (id, answer) => ({
         answer
     }
 });
+
+export const weatherAdded = weatherData => ({
+    type: actions.WEATHER_ADDED,
+    payload: {
+        description: weatherData
+    }
+});

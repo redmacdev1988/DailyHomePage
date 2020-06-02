@@ -10,7 +10,6 @@ let lastId = 0;
 // give same results
 
 export default function reducer(state = [], action) {
-
     switch(action.type) {
         case actions.QUESTION_ADDED:
             return [
