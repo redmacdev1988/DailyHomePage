@@ -1,3 +1,6 @@
+import store from './redux/store';
+import { coronaAdded } from './redux/actions';
+
 const CASES_BY_COUNTRY_URL = 'https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php';
 const X_RAPIDAPI_HOST = "coronavirus-monitor.p.rapidapi.com";
 const X_RAPIDAPI_KEY = "bceb3c6713msh7b978618cfc7a1fp146facjsn41317387a72a";
@@ -21,9 +24,13 @@ function getCountrySVGIconURL(countryName) {
 
 class CoronaCases {       
     constructor(casesURL, rapidApiHost, rapidApiKey) {  
-
+        let _prevData;
         let _opened = false;
         let _coronaVirusBckgndWidth = 0;
+
+        this.url = casesURL;
+        this._data; // undefined
+        this.table = document.getElementById(FLAGTABLE_CSS_ID);
 
         let decreasingFunc = (currentItem, nextItem, property) => {
             let next = nextItem[property].replace(/,/g, '');
@@ -41,9 +48,7 @@ class CoronaCases {
             decreasing: decreasingFunc,
         }); // this is private
         
-        this.url = casesURL;
-        this.data; // undefined
-        this.table = document.getElementById(FLAGTABLE_CSS_ID);
+       
 
         let imgFlag = (flagName='China') => {
             let flagSize = privateProps.get(this).flagSize
@@ -59,7 +64,7 @@ class CoronaCases {
             for (let i = 0; i < NUM_OF_COUNTRIES_TO_DISPLAY; i++) {
                 let prevCountryName = prevData[i].country_name;
                 let indexOfCur = -1;
-                this.data.map( function(currentCountry, index) {
+                this._data.map( function(currentCountry, index) {
                     if (currentCountry.country_name == prevCountryName) { indexOfCur = index; }
                 });
 
@@ -79,7 +84,7 @@ class CoronaCases {
                     onComplete: () => {
 
                         // make sure data on html is updated
-                        let newData = this.data[i];
+                        let newData = this._data[i];
                         let newCountryName = newData.country_name.replace(/\s+/g, '-');
                         let hypened = newCountryName.replace(/\./g,'');
                         rows[i+1].id = hypened;
@@ -106,7 +111,7 @@ class CoronaCases {
             } // loop
         }
 
-        this[createCoronaUIFunc] = callback => {
+        this[createCoronaUIFunc] = () => {
             if (!!this.table) {  // previous table exists, let's clear out its data
                 this.table.innerHTML = '';       
             } else { // previous table does not exist, let's create one
@@ -135,12 +140,12 @@ class CoronaCases {
 
             let numOfCountriesToDisplay = privateProps.get(this).numOfCountriesToDisplay;
             for (var i = 0; i < numOfCountriesToDisplay; i++) {
-                let countryName = this.data[i].country_name;
+                let countryName = this._data[i].country_name;
                 countryName = countryName.replace(/\s+/g, '-');
                 let hypened = countryName.replace(/\./g,'');
                 
-                let deaths = this.data[i].deaths;
-                let cases = this.data[i].cases;
+                let deaths = this._data[i].deaths;
+                let cases = this._data[i].cases;
 
                 let intDeaths = parseFloat(deaths.replace(/,/g, ''));
                 let intCases = parseFloat(cases.replace(/,/g, ''));
@@ -180,7 +185,7 @@ class CoronaCases {
                 this.table.appendChild(tableRow); // finally we add the row full of data
             }
             document.getElementById('CoronaVirusStats').appendChild(this.table);       
-            callback();
+            //callback();
         }
 
         function createEventHandlerForTriggerBtn() {
@@ -225,32 +230,41 @@ class CoronaCases {
             });
         }
 
+        // todo put in previous data here so that way in render, you can animate between previous and current
         let createEventHandlerForCases = () => {
             document.querySelector('#cases').addEventListener("click", this.updateData.bind(this, false, () => {
-
+                console.log('clicked on CASES button');
+                store.dispatch(
+                    coronaAdded({ cases: this._data })
+                );
             }));
         }
 
         let createEventHandlerForDeaths = () => {
             document.querySelector('#deaths').addEventListener("click", this.updateData.bind(this, true, () => {
-
+                console.log('clicked on DEATHS button');
+                store.dispatch(
+                    coronaAdded({ cases: this._data })
+                );
             }));
         }
 
+        this.initEvents = () => {
+            let table = document.querySelector('#flagTable');
+            _coronaVirusBckgndWidth = table.offsetWidth;
+            document.querySelector('#CoronaVirusStats').style.left = -1*_coronaVirusBckgndWidth + 'px';
+            styleTriggerBtn();
+            createEventHandlerForTriggerBtn();
+            createEventHandlerForCases();
+            createEventHandlerForDeaths();
+        }
 
-
-        this.init = () => {
+        this.init = callback => {
             this.updateData(false, () => {
-                let table = document.querySelector('#flagTable');
-                _coronaVirusBckgndWidth = table.offsetWidth;
-                document.querySelector('#CoronaVirusStats').style.left = -1*_coronaVirusBckgndWidth + 'px';
-                styleTriggerBtn();
-                createEventHandlerForTriggerBtn();
-                createEventHandlerForCases();
-                createEventHandlerForDeaths();
-                console.log('corona cases receive data', this.data);
+                callback(this._data);
             }); 
         }
+
     } // end of constructor
 
     //prototype functions
@@ -264,6 +278,27 @@ class CoronaCases {
         });               
     }
 
+    // todo
+    render = payload => {
+        console.log('CORONA RENDER');
+        this._data = payload;
+
+        // const { prev, current} = payload;
+
+        // if (prev) {
+        //    animateCoronaUIFunc
+        // } else {
+        //  createCoronaUIFunc
+        //}
+
+        if (this._prevData) {
+            this[animateCoronaUIFunc](this._prevData);
+        } else {
+            this[createCoronaUIFunc](); // don't need anything because we're using this._data for initial Creation of Corona UI table
+        }
+    }
+
+
     updateData = (byDeaths=false, cbFinish) => {     
         this.fetchData()
         .then(response => response.json())
@@ -271,29 +306,24 @@ class CoronaCases {
 
             // get fresh data here
 
-            let prevData = this.data;
-            this.data = data.countries_stat;
+            this._prevData = this._data;
+            this._data = data.countries_stat;
+
+            // NOTE: sory function changes its own array
             if (byDeaths) {
-                this.data.sort((a,b) => privateProps.get(this).decreasing(a, b, 'deaths'));
+                this._data.sort((a,b) => privateProps.get(this).decreasing(a, b, 'deaths'));
             } else {
-                this.data.sort((a,b) => privateProps.get(this).decreasing(a, b, 'cases'));
+                this._data.sort((a,b) => privateProps.get(this).decreasing(a, b, 'cases'));
             }
-            if (prevData) {
-                this[animateCoronaUIFunc](prevData);
-                cbFinish();
-            } else {
-                this[createCoronaUIFunc](cbFinish);
-            }
+
+
+            cbFinish();
+
         }).catch(err => { console.log(err);});
     } // updateData          
 } // end of class
     
 var coronaInstance = new CoronaCases(CASES_BY_COUNTRY_URL, X_RAPIDAPI_HOST, X_RAPIDAPI_KEY);
-if (coronaInstance) {
-    console.log(`Created CoronaCases instance √`); 
-    coronaInstance.init();
-}
-
 export default coronaInstance;
 
 

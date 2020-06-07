@@ -1,5 +1,23 @@
 import * as actions from './actionTypes';
 
+// export const coronaAdded = cases => ({
+//     type: actions.CORONA_ADDED,
+//     payload: {
+//         cases
+//     }
+// });
+
+export const coronaAdded = cases => {
+    console.log(`actions.js - coronaAdded`);
+    return {
+        type: actions.CORONA_ADDED,
+        payload: {
+            cases
+        }
+    };
+}
+
+
 
 export const questionAdded = description => ({
     type: actions.QUESTION_ADDED,
