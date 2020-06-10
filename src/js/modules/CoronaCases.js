@@ -278,19 +278,8 @@ class CoronaCases {
         });               
     }
 
-    // todo
     render = payload => {
-        console.log('CORONA RENDER');
         this._data = payload;
-
-        // const { prev, current} = payload;
-
-        // if (prev) {
-        //    animateCoronaUIFunc
-        // } else {
-        //  createCoronaUIFunc
-        //}
-
         if (this._prevData) {
             this[animateCoronaUIFunc](this._prevData);
         } else {
@@ -298,27 +287,18 @@ class CoronaCases {
         }
     }
 
-
     updateData = (byDeaths=false, cbFinish) => {     
         this.fetchData()
         .then(response => response.json())
         .then(data => {
-
-            // get fresh data here
-
             this._prevData = this._data;
             this._data = data.countries_stat;
-
-            // NOTE: sory function changes its own array
             if (byDeaths) {
                 this._data.sort((a,b) => privateProps.get(this).decreasing(a, b, 'deaths'));
             } else {
                 this._data.sort((a,b) => privateProps.get(this).decreasing(a, b, 'cases'));
             }
-
-
             cbFinish();
-
         }).catch(err => { console.log(err);});
     } // updateData          
 } // end of class

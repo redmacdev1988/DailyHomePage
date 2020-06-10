@@ -67,10 +67,9 @@ body, #slider, #Carousel, .slide-content {
     right: 0;
     margin-right: 30px;
   }
-  
+
   /* Corona virus stats */
   #CoronaVirusStats { 
-
     float: left; 
     background: rgba(255, 255, 255, 0.5); 
     height: 100vh;
@@ -109,11 +108,17 @@ body, #slider, #Carousel, .slide-content {
     list-style: none;
   }
   
-  #coronaBtn {
+  #coronaBtn, #exchangeRateBtn {
     margin: 10px;
   }
   #coronaBtn img {
     background: rgba(255, 0, 0, 0.8); 
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  #exchangeRateBtn img {
+    background: rgba(163, 238, 161, 0.8); 
     padding: 6px;
     border-radius: 10px;
   }
@@ -131,4 +136,27 @@ body, #slider, #Carousel, .slide-content {
     display: flex;
     justify-content: flex-end;
     width: 80%;
+  }
+
+  
+  #exchangeRateTable .col {
+    padding: 8px;
+  }
+
+  #exchangeRateTable .col img {
+    margin-right: 10px;
+  }
+
+  #exchangeRateTable .row {
+    padding: 5px;
+  }
+
+
+  #currencyInput .input-group {
+    margin-top: 10px;
+  }
+
+  #currencyAmt {
+    margin-left: 20px;
+    width: 25%;
   }

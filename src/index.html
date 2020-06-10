@@ -13,64 +13,137 @@
     <body style="font-family: Arial;border: 0 none;">
         <script src="./js/modules/gsap.min.js"></script>
 
-        <div class="pos-f-t">
-            
-            <div class="collapse" id="navbarToggleExternalContent">
+      
+        
+        
 
-              <div class="bg-dark p-4">
-                  <h4 class="text-white">Collapsed content</h4>
-                  <span class="text-muted">Toggleable via the navbar brand.</span>
-                </div>
-              </div>
-
-            <nav class="navbar navbar-dark bg-dark">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>               
-              </button>
-              
-              <div id='casesTotal'>
-
-              </div>
-              
-              <div id='navButtons'>
-                <span id='coronaBtn' >
-                    <img src='./img/virus.png' />
-                </span>
-
-                <div id='MyWeather'>
-                    <div id='weather'>
-                        <b id="location"></b>
-                        <span id="temp"></span>
-                    </div>
-                </div>
-
-              </div>
-           
-            </nav>
-
-          </div> <!-- pos-f-t -->
-    
-
-        <div id="Carousel">
-            <!--  MyWeather -->
-
-            <div id="CoronaVirusStats">
-                <div id='sortContent'> 
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Action
-                        </button>
-                        <div class="dropdown-menu">
-                            <button id='cases' type="button" class="btn">cases</button>
-                            <div class="dropdown-divider"></div>
-                            <button id='deaths' type="button" class="btn">deaths</button>
-                        </div>
-                      </div>
-    
-                </div>
+        <div class="pos-f-t">      
+          <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+              <h4 class="text-white">Collapsed content</h4>
+              <span class="text-muted">Toggleable via the navbar brand.</span>
             </div>
-            <div id="slider"></div>
-            <div id="arrow-right" class="arrow"></div>
+          </div>
+
+          <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>               
+            </button>
+            
+            <div id='navButtons'>
+
+              <div id="currencyInput">
+
+                <!-- 
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><img src='./img/exchange.png' /></span>
+                  </div>
+                  <input id="textInput" type="text" class="form-control" placeholder="i.e CNY" aria-label="currency" aria-describedby="basic-addon1">
+                </div>
+              -->
+
+              </div>
+
+              <span id='exchangeRateBtn' data-toggle="modal" data-target="#exchangeRateModal">
+                <img src='./img/money.png' />
+              </span>
+
+            
+
+            
+
+              <span id='coronaBtn' >
+                <img src='./img/virus.png' />
+              </span>
+
+              <div id='MyWeather'>
+                <div id='weather'>
+                  <b id="location"></b>
+                  <span id="temp"></span>
+                </div>
+              </div>
+
+            </div>
+          </nav>
+        </div> <!-- pos-f-t -->
+
+        <div id="Carousel">  
+          
+          <div id="CoronaVirusStats">
+              <div id='sortContent'> 
+                  <div class="btn-group">
+                      <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Action
+                      </button>
+                      <div class="dropdown-menu">
+                          <button id='cases' type="button" class="btn">cases</button>
+                          <div class="dropdown-divider"></div>
+                          <button id='deaths' type="button" class="btn">deaths</button>
+                      </div>
+                    </div>
+
+              </div>
+          </div>
+
+         
+         
+          <!-- Modal  -->
+          <div class="modal fade" 
+                    id="exchangeRateModal" 
+                    tabindex="-1" 
+                    role="dialog" 
+                    aria-labelledby="exchangeRateModalLabel" 
+                    aria-hidden="true">
+
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <div class="btn-group">
+                    <button id="currencyBtn" type="button" class="btn btn-outline-info btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Currency
+                    </button>
+                    <div class="dropdown-menu" id="currencyList">
+                      <a class="dropdown-item" href="#">CNY</a>
+                      <a class="dropdown-item" href="#">USD</a>
+                      <a class="dropdown-item" href="#">JPY</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Gold</a>
+                    </div>
+                  </div>
+
+                  <script>
+                    function restrictAlphabets(e) {
+                      /*
+                        var x = e.which || e.keycode;
+                        if ((x >= 48 && x <= 57))
+                            return true;
+                        else
+                            return false;
+                            */
+                    }
+                  </script>
+
+                  <div id="currencyAmt" class="input-group input-group-sm mb-3">
+                    <input id="amount" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                  </div>
+
+                  <button type="button" id="closeExchangeRateModal" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div id="exchangeRateTable" class="container modal-body"></div>
+              </div>              
+            </div>
+          </div>
+      
+
+
+
+
+          <div id="slider"></div>
+          <div id="arrow-right" class="arrow"></div>
         </div>
     </body>
 </html>

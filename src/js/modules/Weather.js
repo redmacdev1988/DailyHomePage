@@ -25,8 +25,6 @@ class Weather {
         });
 
         this.render = (payload) => {
-            console.log("------> WEATHER RENDER");
-
             let state = payload;
             if (!document.querySelector('#weatherIcon')) {
                 console.log('weather icon does not exist, lets makeone');

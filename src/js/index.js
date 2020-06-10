@@ -7,6 +7,11 @@ console.log(`src/js/index.js imported ${x} from ./test varialbe num is ${num}`);
 import store from './modules/redux/store';
 import { weatherAdded, coronaAdded } from './modules/redux/actions';
 
+// Exchange Rate module
+import ExchangeRate from './modules/ExchangeRates';
+
+
+
 // Weather module
 import Weather from './modules/Weather';
 Weather.store = store;
