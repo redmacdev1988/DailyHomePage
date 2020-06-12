@@ -26,9 +26,70 @@ function getCountrySVGIconURL(currencyName) {
     return url + currencyName + '.svg';
 }
 
+
+function createTableFromData(data) {
+    let exchangeRateTable = document.querySelector('#exchangeRateTable');
+    let rates = data.rates;
+    let storedRates = {};
+    let i = 0;
+    let row;
+    for (let key in rates) {
+        if (i % 5==0) {
+            row = document.createElement('div');
+            row.classList.add('row');
+            exchangeRateTable.appendChild(row);
+        } 
+        let col = document.createElement('div');
+        col.classList.add('col');
+        let rateDecimal = rates[key];
+        let twoDecimalPlaces = rateDecimal.toFixed(2);
+        col.appendChild(currencyImg(key));
+        let spanText = document.createElement('span');
+        spanText.innerHTML = `${key} ${twoDecimalPlaces}`;
+        storedRates[key] = parseFloat(twoDecimalPlaces);
+        col.appendChild(spanText);
+        row.appendChild(col);
+        i = i + 1;
+    }
+    return storedRates;
+}
+
+function updateTableFromData (data, base) {
+    let rates = data.rates;
+    let exchangeRateTable = document.querySelector('#exchangeRateTable');
+    const amountEle = document.getElementById("amount");
+    
+    for (let row in exchangeRateTable.children) {
+        let colsArr = exchangeRateTable.children[row];
+        //debugger
+        for (let col in colsArr.children) {
+            //debugger
+            let index = parseInt(col);
+            if (isNaN(index)) {break;}
+            let column = colsArr.children[col];
+            let arr = column.textContent.split(' '); 
+            // ['CNY', 0.18]
+            let currencyName = arr[0];
+            let rate = rates[currencyName];
+            let exchangeRate;
+            if (rate) {
+                exchangeRate = getExchangeRate(rate)
+            } else {
+                throw `No rate exist for name ${currencyName}`;
+            }
+
+            let updatedValue = exchangeRate(amountEle.value);
+            let span = column.children[1];
+            span.textContent = `${currencyName} ${updatedValue.toFixed(2)}`;
+        }
+    }
+    return rates;
+}
+
 class ExchangeRate {
 
-    constructor(baseCurrencyStr='CNY') {
+    // 
+    constructor (baseCurrencyStr='CNY') {
 
         this.rates = {};
 
@@ -50,44 +111,35 @@ class ExchangeRate {
                     let index = parseInt(col);
                     if (isNaN(index)) {break;}
                     let column = colsArr.children[col];
-                    let arr = column.textContent.split(' ');
+                    let arr = column.textContent.split(' '); 
+                    // ['CNY', 0.18]
                     let currencyName = arr[0];
                     let rate = this.rates[currencyName];
-                    let updatedValue = rate * base;
+                    let exchangeRate;
+                    if (rate) {
+                        exchangeRate = getExchangeRate(rate)
+                    } else {
+                        throw `No rate exist for name ${currencyName}`;
+                    }
+
+                    let updatedValue = exchangeRate(base);
                     let span = column.children[1];
                     span.textContent = `${currencyName} ${updatedValue.toFixed(2)}`;
                 }
             }
         }
 
-
-        // fix - todo - get text from amount instead of relying on adding characters
-
         let handlerForCurrencyAmtOnChange = () => {
             const amountEle = document.getElementById("amount");
             let total = new String();
-
-            //const amt = document.getElementById('currencyAmt');
-
             amountEle.addEventListener("keyup", e => {
-
-                //debugger
-                console.log('amount', amountEle.value);
                 let enteredValue = amountEle.value;
-                console.log('enteredValue',enteredValue);
-
                 if (e.key == 'Backspace') {
-                    //total = total.slice(0, -1);
-                    //if (total == "") { total = "0"; }
                     total = enteredValue;
-                } else if (e.keyCode == 37 || e.keyCode == 39) {
-                    console.log('key arrows');
-                }
+                } else if (e.keyCode == 37 || e.keyCode == 39) {}
                 else if (Number.isInteger(parseInt(e.key))) {
-                    //total +=  e.key;
                     total = enteredValue;
                 } else {
-                    console.log('invalid character');
                     e.preventDefault();
                     e.stopPropagation();
                 }
@@ -99,15 +151,18 @@ class ExchangeRate {
         let handlerForDropDownSelection = () => {
            const listEle = document.getElementById("currencyList");
            const btnEle = document.getElementById("currencyBtn");
-           listEle.addEventListener("click", function(e) {
+           listEle.addEventListener("click", e => {
                 console.log('e', e);
                 console.log(e.target.innerText);
                     btnEle.innerText = e.target.innerText;
                     // clear textfield.
                     // fetch new data with 'USD', 
-                    
+                    //debugger
                     // 1) setBaseCurrency('UDS') 
+                    this.setBaseCurrency(btnEle.innerText);
                     // 2) fetchData()
+                    this.fetchData();
+                    
             }, false);
         }
 
@@ -177,43 +232,20 @@ class ExchangeRate {
         aPromise.then(response => response.json())
         .then(data => {
             console.log('data received', data);
+            
             const { USD, JPY, HKD, CNY } = data.rates;
             let USDtoRMB = getExchangeRate(USD);
             let result = USDtoRMB(80000);
+            //debugger
             let exchangeRateTable = document.querySelector('#exchangeRateTable');
-            let rates = data.rates;
-
-            //let row;
-            let numOfRates = rates.length;
-
-            // don't change original
-
-            let i = 0;
-            let row;
-            
-            for (let key in rates) {
-                if (i%5==0) {
-                    row = document.createElement('div');
-                    row.classList.add('row');
-                    exchangeRateTable.appendChild(row);
-                } 
-                
-                // insert data
-                let col = document.createElement('div');
-                col.classList.add('col');
-                let rateDecimal = rates[key];
-                let twoDecimalPlaces = rateDecimal.toFixed(2);
-                col.appendChild(currencyImg(key));
-
-                let spanText = document.createElement('span');
-                spanText.innerHTML = `${key} ${twoDecimalPlaces}`;
-                
-                this.rates[key] = parseFloat(twoDecimalPlaces);
-
-                col.appendChild(spanText);
-                row.appendChild(col);
-                i = i + 1;
+            if (exchangeRateTable.children.length > 0) {
+                console.log('update the table');
+                this.rates = updateTableFromData(data);
+            } else {
+                console.log('create the data');
+                this.rates = createTableFromData(data);
             }
+            
         });
     }
 
