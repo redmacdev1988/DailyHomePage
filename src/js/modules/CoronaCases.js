@@ -5,7 +5,7 @@ const CASES_BY_COUNTRY_URL = 'https://coronavirus-monitor.p.rapidapi.com/coronav
 const X_RAPIDAPI_HOST = "coronavirus-monitor.p.rapidapi.com";
 const X_RAPIDAPI_KEY = "bceb3c6713msh7b978618cfc7a1fp146facjsn41317387a72a";
 const FLAGTABLE_CSS_ID = 'flagTable';
-const NUM_OF_COUNTRIES_TO_DISPLAY = 50;
+const NUM_OF_COUNTRIES_TO_DISPLAY = 30;
 
 // private variables by export scope
 
@@ -29,7 +29,7 @@ class CoronaCases {
         let _coronaVirusBckgndWidth = 0;
 
         this.url = casesURL;
-        this._data; // undefined
+        this._data;
         this.table = document.getElementById(FLAGTABLE_CSS_ID);
 
         let decreasingFunc = (currentItem, nextItem, property) => {
@@ -48,8 +48,6 @@ class CoronaCases {
             decreasing: decreasingFunc,
         }); // this is private
         
-       
-
         let imgFlag = (flagName='China') => {
             let flagSize = privateProps.get(this).flagSize
             let imgEle = document.createElement('img');
@@ -249,6 +247,34 @@ class CoronaCases {
             }));
         }
 
+        let showTotal = () => {
+            let deathsEle = document.querySelector('#totalDeaths');
+            let casesEle = document.querySelector('#totalCases');
+
+            let a = store.getState();
+            let dataArr = a.coronaReducer.state.cases;
+            let totalCases = 0;
+            let totalDeaths = 0;
+            
+            dataArr.forEach(element => {
+                //debugger;
+                var noCommaCases = element.cases.replace(",", ""); 
+                let casesInt = parseInt(noCommaCases);
+                totalCases += casesInt;
+
+                var noCommaDeaths = element.deaths.replace(",", ""); 
+                let deathsInt = parseInt(noCommaDeaths);
+                totalDeaths += deathsInt;
+            });
+
+            //debugger
+            console.log(`${totalCases} ${totalDeaths}`);
+
+            deathsEle.innerHTML = `total deaths: ${totalDeaths}`;
+            casesEle.innerHTML = `total cases: ${totalCases}`;
+
+        }
+
         this.initEvents = () => {
             let table = document.querySelector('#flagTable');
             _coronaVirusBckgndWidth = table.offsetWidth;
@@ -257,6 +283,7 @@ class CoronaCases {
             createEventHandlerForTriggerBtn();
             createEventHandlerForCases();
             createEventHandlerForDeaths();
+            showTotal();
         }
 
         this.init = callback => {
