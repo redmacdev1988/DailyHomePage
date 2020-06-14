@@ -169,7 +169,6 @@ class ExchangeRate {
         let handlerForOutsideDialogClick = () => {
             document.addEventListener('click', function (e) {
                 if (e.target.className === 'modal fade'){
-                     console.log('clicked outside');
                      let exchangeRateBtn = document.querySelector('#exchangeRateBtn');
                      gsap.to(exchangeRateBtn, {
                         duration: 1.0, 
@@ -185,7 +184,6 @@ class ExchangeRate {
             let closeRateBtn = document.querySelector('#closeExchangeRateModal');
 
             closeRateBtn.addEventListener('click', function() {
-                console.log('testing 1 2 ');
                 gsap.to(exchangeRateBtn, {
                     duration: 1.0, 
                     rotation: 0

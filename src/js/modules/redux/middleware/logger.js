@@ -6,15 +6,9 @@ import Weather from '../../Weather';
 // sna - store, next, action
 
 const logger = store => next => action => {
-    console.log(`--- logger ----`);
-
-    //console.log("store", store);
-    //console.log("next", next);
-    console.log("action", action);
 
     // run the render 
     if (action.type == "coronaAdded") {
-        console.log('logger.js - action type is coronaAdded', action.payload.cases.cases);
         CoronaCases.render(action.payload.cases.cases);
     }
 

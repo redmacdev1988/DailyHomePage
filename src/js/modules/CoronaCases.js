@@ -231,7 +231,6 @@ class CoronaCases {
         // todo put in previous data here so that way in render, you can animate between previous and current
         let createEventHandlerForCases = () => {
             document.querySelector('#cases').addEventListener("click", this.updateData.bind(this, false, () => {
-                console.log('clicked on CASES button');
                 store.dispatch(
                     coronaAdded({ cases: this._data })
                 );
@@ -240,7 +239,6 @@ class CoronaCases {
 
         let createEventHandlerForDeaths = () => {
             document.querySelector('#deaths').addEventListener("click", this.updateData.bind(this, true, () => {
-                console.log('clicked on DEATHS button');
                 store.dispatch(
                     coronaAdded({ cases: this._data })
                 );

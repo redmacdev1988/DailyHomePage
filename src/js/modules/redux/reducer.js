@@ -26,7 +26,6 @@ export default function reducer(state = [], action) {
 
         case actions.QUESTION_ANSWER: 
             return state.map(question => {
-                console.log('question', question);
                 if (question.id !== action.payload.id) {
                     return question;
                 } else {

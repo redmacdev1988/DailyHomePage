@@ -6,14 +6,12 @@ const host = 'http://localhost';
 const subFolder = 'img';
 const url = `${host}:${port}/${subFolder}`;
 
-_circularQueue.insertData( `${url}/chang-an.jpg`, 'chang-an');
-_circularQueue.insertData( `${url}/flower-garden.jpg`, 'flower-garden');
-_circularQueue.insertData( `${url}/flower-garden2.jpg`, 'flower-garden2');
-_circularQueue.insertData( `${url}/palace_wall.jpg`, 'palace-wall');
+_circularQueue.insertData( `${url}/tanglang1.jpg`, 'tanglan');
+_circularQueue.insertData( `${url}/horses-jeju-island.jpg`, 'horses');
+_circularQueue.insertData( `${url}/seoul-fried-chicken.jpg`, 'fried chicken');
+_circularQueue.insertData( `${url}/antuoshan1.jpg`, 'antuoshan 1');
+_circularQueue.insertData( `${url}/antuoshan2.jpg`, 'antuoshan 2');
 _circularQueue.insertData( `${url}/beijing-grounds.jpg`, 'beijing-grounds');
-_circularQueue.insertData( `${url}/wujiang-concert.jpg`, 'wujiang-concert');
-_circularQueue.insertData( `${url}/wujiang-park.jpg`, 'wujiang-park');
-_circularQueue.insertData( `${url}/Zhou-Zhuang-Boat.jpg`, 'Zhou-Zhuang-Boat');
 
 console.log(`Created CircularQueue with Images √`);
 
