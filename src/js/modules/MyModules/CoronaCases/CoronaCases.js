@@ -1,5 +1,5 @@
-import store from './redux/store';
-import { coronaAdded } from './redux/actions';
+import store from '../../redux/store';
+import { coronaAdded } from '../../redux/actions';
 
 const CASES_BY_COUNTRY_URL = 'https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_country.php';
 const X_RAPIDAPI_HOST = "coronavirus-monitor.p.rapidapi.com";

@@ -1,5 +1,4 @@
 import CircularQueue from './CircularQueue.js';
-import EXIF from './exif/exif';
 
 let _circularQueue = new CircularQueue('slideshow');
 const port = '8080';

@@ -1,5 +1,5 @@
-import CoronaCases from '../../CoronaCases';
-import Weather from '../../Weather';
+import CoronaCases from '../../MyModules/CoronaCases/CoronaCases';
+import Weather from '../../MyModules/Weather/Weather';
 
 // log every action that is dispatched
 
