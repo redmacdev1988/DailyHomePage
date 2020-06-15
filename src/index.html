@@ -12,71 +12,6 @@
     </head>
     <body style="font-family: Arial;border: 0 none;">
         <script src="./js/modules/gsap.min.js"></script>
-        <!-- 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
-        -->
-        
-        <script type="text/javascript" src="./js/modules/exif/exif.js"></script>
-       
-        <img src="./img/antuoshan2.jpg" id="the-img" style="max-width: 200px;"><br>
-        <p id="pic-info"></p>
-        <p id="map-link"></p>
-
-       
-    <script>
-        "use strict";
-        window.onload=getExif;
-
-        function ParseDMS(parts) {
-            //var parts = input.split(/[^\d\w]+/);
-            var lat = ConvertDMSToDD(parts[0], parts[1], parts[2], parts[3]);
-            var lng = ConvertDMSToDD(parts[4], parts[5], parts[6], parts[7]);
-        }
-
-        function ConvertDMSToDD(degrees, minutes, seconds, direction) {
-            var dd = degrees + minutes/60 + seconds/(60*60);
-            if (direction == "S" || direction == "W") {
-                dd = dd * -1;
-            } // Don't do anything for N or E
-            return dd;
-        }
-
-        function getExif() {
-        
-            var img2 = document.getElementById("the-img");
-            EXIF.getData(img2, function() {
-                var allMetaData = EXIF.getAllTags(this);
-                console.log('all meta data', allMetaData);
-
-                let latArr = allMetaData.GPSLatitude;
-                latArr.push(allMetaData.GPSLatitudeRef);
-                console.log(latArr);
-
-                let result = ConvertDMSToDD(latArr[0].valueOf(), latArr[1].valueOf(), latArr[2].valueOf(), latArr[3].valueOf());
-                console.log('lattitude', result);
-                debugger
-
-                let longArr = allMetaData.GPSLongitude;
-                longArr.push(allMetaData.GPSLongitudeRef);
-                console.log(longArr);
-
-                let result2 = ConvertDMSToDD(longArr[0].valueOf(), 
-                                            longArr[1].valueOf(), 
-                                            longArr[2].valueOf(), 
-                                            longArr[3].valueOf());
-
-                console.log('longArr', result2);
-                debugger
-
-                //var allMetaDataSpan = document.getElementById("allMetaDataSpan");
-                //allMetaDataSpan.innerHTML = JSON.stringify(allMetaData, null, "\t");
-            });
-        }
-
-        getExif();
-    </script>
-
-
 
         <div class="pos-f-t">      
           <div class="collapse" id="navbarToggleExternalContent">
@@ -94,25 +29,11 @@
             <div id='navButtons'>
 
               <div id="currencyInput">
-
-                <!-- 
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1"><img src='./img/exchange.png' /></span>
-                  </div>
-                  <input id="textInput" type="text" class="form-control" placeholder="i.e CNY" aria-label="currency" aria-describedby="basic-addon1">
-                </div>
-              -->
-
               </div>
 
               <span id='exchangeRateBtn' data-toggle="modal" data-target="#exchangeRateModal">
                 <img src='./img/money.png' />
               </span>
-
-            
-
-            
 
               <span id='coronaBtn' >
                 <img src='./img/virus.png' />

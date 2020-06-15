@@ -1,4 +1,5 @@
 import CircularQueue from './CircularQueue.js';
+import EXIF from './exif/exif';
 
 let _circularQueue = new CircularQueue('slideshow');
 const port = '8080';
@@ -46,7 +47,6 @@ function _insertSlideIntoSlider(queue, sliderID, startingX, slideText) {
     return main;
 }
 
-
 function _addRightArrowEventHandler() {
 
     let arrowRight = document.querySelector('#arrow-right');
@@ -89,6 +89,9 @@ function _addRightArrowEventHandler() {
 }
 
 
+
+
+
 class Carousel {
     constructor(mainID) {
         _screenWidth = window.innerWidth;
@@ -123,7 +126,8 @@ class Carousel {
         }
 
         _addRightArrowEventHandler.call(this);
-    }
+    } // constructo
+
 }
 
 let carouselInstance = new Carousel("#slider");
@@ -133,4 +137,3 @@ export default carouselInstance;
 
 
 
-//https://www.npmjs.com/package/exif-js

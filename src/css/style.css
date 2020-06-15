@@ -84,12 +84,12 @@ body, #slider, #Carousel, .slide-content {
       float:left;
       width: 50%;
   }
-  /*
+  
   ::-webkit-scrollbar {
     width: 0px;
     background: transparent; 
 }
-*/
+
 
   #CoronaVirusStats #sortText { margin-right: 15px; font-weight: 900; }
   #CoronaVirusStats #flagTable { 

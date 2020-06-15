@@ -8,7 +8,6 @@ import * as actions from './actionTypes';
 // });
 
 export const coronaAdded = cases => {
-    console.log(`actions.js - coronaAdded`);
     return {
         type: actions.CORONA_ADDED,
         payload: {

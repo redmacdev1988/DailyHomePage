@@ -221,26 +221,19 @@ class ExchangeRate {
     //getExchangeRate = rate => value => value * rate;
 
     fetchData = () => {
-        console.log(`fetch exchange data from ${this.url}`);
-
         let aPromise = fetch(this.url, {
             "method": "GET",
         });           
         
         aPromise.then(response => response.json())
         .then(data => {
-            console.log('data received', data);
-            
             const { USD, JPY, HKD, CNY } = data.rates;
             let USDtoRMB = getExchangeRate(USD);
             let result = USDtoRMB(80000);
-            //debugger
             let exchangeRateTable = document.querySelector('#exchangeRateTable');
             if (exchangeRateTable.children.length > 0) {
-                console.log('update the table');
                 this.rates = updateTableFromData(data);
             } else {
-                console.log('create the data');
                 this.rates = createTableFromData(data);
             }
             
@@ -249,7 +242,6 @@ class ExchangeRate {
 
     setBaseCurrency = (currencyName = 'CNY') => {
         this.url = EXCHANGE_RATE_URL + currencyName;
-        console.log(`url is now ${this.url}`);
     }
 
 }
