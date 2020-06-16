@@ -292,7 +292,8 @@ class CoronaCases {
 
     } // end of constructor
 
-    //prototype functions
+    ///////////// PROTOTYPE functions //////
+
     fetchData = () => {
         return fetch(this.url, {
             "method": "GET",

@@ -49,6 +49,7 @@ function _insertSlideIntoSlider(queue, sliderID, startingX, slideText) {
 function _addRightArrowEventHandler() {
 
     let arrowRight = document.querySelector('#arrow-right');
+
     if (arrowRight) {
         let animating = false;
         arrowRight.addEventListener('click', evt => {
@@ -63,7 +64,10 @@ function _addRightArrowEventHandler() {
                     ease:'power4', // bounce, back,
                     clearProps:"transform", // clears out translate 3d,
                     onStart: function() {
-                        if (!animating) { animating = true; } 
+                        if (!animating) { 
+                            animating = true; 
+                            arrowRight.style['pointer-events'] = 'none';
+                        } 
                     },
                     onComplete: function() {
                         if (animating) {
@@ -78,6 +82,8 @@ function _addRightArrowEventHandler() {
                                 }
                             }
                             animating = false;
+                            arrowRight.style['pointer-events'] = '';
+
                         } 
                     },
 
@@ -86,7 +92,6 @@ function _addRightArrowEventHandler() {
         });
     } else { console.log('arrowRight not found'); }
 }
-
 
 
 
@@ -111,15 +116,17 @@ class Carousel {
         }
 
         window.onresize = () => { 
+            console.log(`-- window resize --`);
+
             _screenWidth = window.innerWidth;
             var slides = document.getElementsByClassName('slide');  
-            let posInSlide = 0;
+            let _posInSlide = 0;
             let stepsLeft = slides.length;
             let currentIndex = _currentIndex % slides.length;
             while(stepsLeft > 0) {
-                slides[currentIndex].style.left = posInSlide * _screenWidth + 'px';
+                slides[currentIndex].style.left = _posInSlide * _screenWidth + 'px';
                 currentIndex = ++currentIndex % slides.length;
-                posInSlide++;
+                _posInSlide++;
                 stepsLeft--;
             }
         }
@@ -128,6 +135,11 @@ class Carousel {
     } // constructo
 
 }
+
+let ricky = (function() {
+
+    // another closure!
+})();
 
 let carouselInstance = new Carousel("#slider");
 
