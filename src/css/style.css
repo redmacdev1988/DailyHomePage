@@ -1,4 +1,5 @@
-body, #slider, #Carousel, .slide-content {
+
+body, #slider, .slide-content {
 
     margin: 0;
     padding: 0;
@@ -6,9 +7,17 @@ body, #slider, #Carousel, .slide-content {
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
-    background-color: 'yellow';
   }
   
+  #Carousel {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
   #MyWeather {
     color: white;
   }
@@ -73,7 +82,7 @@ body, #slider, #Carousel, .slide-content {
     float: left; 
     background: rgba(255, 255, 255, 0.5); 
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
   
     position: relative;
     left: -999px;
@@ -85,13 +94,14 @@ body, #slider, #Carousel, .slide-content {
       width: 50%;
   }
   
-  ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; 
-}
 
 
-  #CoronaVirusStats #sortText { margin-right: 15px; font-weight: 900; }
+
+  #CoronaVirusStats #sortText { 
+    margin-right: 15px; 
+    font-weight: 900; 
+  }
+
   #CoronaVirusStats #flagTable { 
     text-align: left; 
   }
@@ -121,7 +131,7 @@ body, #slider, #Carousel, .slide-content {
     list-style: none;
   }
   
-  #coronaBtn, #exchangeRateBtn {
+  #coronaBtn, #exchangeRateBtn, #newsBtn {
     margin: 10px;
   }
   #coronaBtn img {
@@ -136,6 +146,12 @@ body, #slider, #Carousel, .slide-content {
     border-radius: 10px;
   }
   
+  #newsBtn img {
+    background: rgba(232,231, 235, 0.8); 
+    padding: 6px;
+    border-radius: 10px;
+  }
+
   
   .circle {
     background-color: red;
@@ -164,12 +180,34 @@ body, #slider, #Carousel, .slide-content {
     padding: 5px;
   }
 
-
-  #currencyInput .input-group {
-    margin-top: 10px;
-  }
-
   #currencyAmt {
     margin-left: 20px;
     width: 25%;
+  }
+
+  #NewsFeed {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    bottom: -999px;
+    z-index: -99;
+  }
+
+  .news-content {
+    overflow: auto;
+    min-height: 0;
+    flex-grow: 1;
+  }
+
+  .panel-primary {
+    width: 80%;
+  }
+
+  .list-group{
+    border: 5px solid black;
+    max-height: 200px;
+    margin-bottom: 10px;
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
   }

@@ -5,7 +5,7 @@ const CASES_BY_COUNTRY_URL = 'https://coronavirus-monitor.p.rapidapi.com/coronav
 const X_RAPIDAPI_HOST = "coronavirus-monitor.p.rapidapi.com";
 const X_RAPIDAPI_KEY = "bceb3c6713msh7b978618cfc7a1fp146facjsn41317387a72a";
 const FLAGTABLE_CSS_ID = 'flagTable';
-const NUM_OF_COUNTRIES_TO_DISPLAY = 30;
+const NUM_OF_COUNTRIES_TO_DISPLAY = 100;
 
 // private variables by export scope
 
@@ -274,8 +274,16 @@ class CoronaCases {
         }
 
         this.initEvents = () => {
+
+            let div = document.querySelector('#CoronaVirusStats')
+            let scrollbarWidth = div.offsetWidth - div.clientWidth;
+            console.log('scrollbarWidth', scrollbarWidth);
+
             let table = document.querySelector('#flagTable');
-            _coronaVirusBckgndWidth = table.offsetWidth;
+            //debugger
+            
+
+            _coronaVirusBckgndWidth = table.offsetWidth + scrollbarWidth;
             document.querySelector('#CoronaVirusStats').style.left = -1*_coronaVirusBckgndWidth + 'px';
             styleTriggerBtn();
             createEventHandlerForTriggerBtn();

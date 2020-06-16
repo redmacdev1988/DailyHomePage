@@ -5,10 +5,13 @@ console.log(`src/js/index.js imported ${x} from ./test varialbe num is ${num}`);
 import store from './modules/redux/store';
 import { weatherAdded, coronaAdded } from './modules/redux/actions';
 
+
+// News module
+import News from './modules/MyModules/News/index';
+
+
 // Exchange Rate module
 import ExchangeRate from './modules/MyModules/ExchangeRates/ExchangeRates';
-
-
 
 // Weather module
 import Weather from './modules/MyModules/Weather/Weather';

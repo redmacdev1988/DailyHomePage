@@ -5,7 +5,6 @@
         <title>My Home Page</title>
         <link rel="stylesheet" href="css/style.css" > 
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
-        
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
         <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js'></script>
         <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' rel='stylesheet'>
@@ -28,15 +27,16 @@
             
             <div id='navButtons'>
 
-              <div id="currencyInput">
-              </div>
+              <span id='newsBtn'>
+                <img src='./img/appIcons/news.png' />
+              </span>
 
               <span id='exchangeRateBtn' data-toggle="modal" data-target="#exchangeRateModal">
-                <img src='./img/money.png' />
+                <img src='./img/appIcons/money.png' />
               </span>
 
               <span id='coronaBtn' >
-                <img src='./img/virus.png' />
+                <img src='./img/appIcons/virus.png' />
               </span>
 
               <div id='MyWeather'>
@@ -52,6 +52,7 @@
 
         <div id="Carousel">  
           
+          <!-- Corona Virus Data -->
           <div id="CoronaVirusStats">
               <div id='sortContent'> 
                   <div id="CoronaTotal">
@@ -75,9 +76,8 @@
               </div>
           </div>
 
-         
-         
-          <!-- Modal  -->
+          
+          <!-- Exchange Rate Modal  -->
           <div class="modal fade" 
                     id="exchangeRateModal" 
                     tabindex="-1" 
@@ -100,19 +100,6 @@
                       <a class="dropdown-item" href="#">Gold</a>
                     </div>
                   </div>
-
-                  <script>
-                    function restrictAlphabets(e) {
-                      /*
-                        var x = e.which || e.keycode;
-                        if ((x >= 48 && x <= 57))
-                            return true;
-                        else
-                            return false;
-                            */
-                    }
-                  </script>
-
                   <div id="currencyAmt" class="input-group input-group-sm mb-3">
                     <input id="amount" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
                   </div>
@@ -128,13 +115,72 @@
               </div>              
             </div>
           </div>
-      
 
 
-
-
+          
           <div id="slider"></div>
           <div id="arrow-right" class="arrow"></div>
+
+         
+  
+          <div class="panel panel-primary" id="result_panel">
+            <div class="panel-heading"><h3 class="panel-title">Result List</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(-10m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(0m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(1m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(5m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(7m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(80m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(13480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(12480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(143480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(143480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(1234480m)
+                    </li>
+                    <li class="list-group-item"><strong>Signature
+                        Accommodations</strong>(1234480m)
+                    </li>
+                </ul>
+            </div>
         </div>
+         
+
+
+
     </body>
+
+ 
+
+
+
 </html>
