@@ -97,7 +97,10 @@ class CoronaCases {
                         var aFlag = imgFlag(hypened);
                         imgData.appendChild(aFlag);
                         cells[0].innerHTML = imgData.innerHTML;
-                        cells[1].textContent = newData.country_name;
+
+                        let name = newData.country_name;
+                        cells[1].textContent = (name.length <=15) ? name : name.substring(0, 15);
+
                         cells[2].textContent = newData.cases;
                         cells[3].textContent = newData.deaths;
                         cells[4].textContent = deathPercentage.toFixed(2) + ' %';
@@ -159,7 +162,10 @@ class CoronaCases {
 
                 var countryData = document.createElement("td"); 
                 countryData.setAttribute('class', 'country-name' );
-                var countrySpanContents = document.createTextNode(hypened);
+
+                
+
+                var countrySpanContents = document.createTextNode((hypened.length <=15) ? hypened : hypened.substring(0, 15));
                 countryData.appendChild(countrySpanContents);  // row add data
                 tableRow.appendChild(countryData);
 
