@@ -1,6 +1,3 @@
-import store from '../../redux/store';
-import { weatherAdded } from '../../redux/actions';
-
 const WEATHER_LOCATION_STRING = 'Shenzhen,China';
 const WEATHER_API =  'https://api.openweathermap.org/data/2.5/weather?q=';
 const OPEN_WEATHER_MAP_KEY = '8fa0a05a6027cc756610f184b1677e8a';
@@ -9,9 +6,6 @@ let _privateProps = new WeakMap();
 
 class Weather {
     constructor(weatherURL, place='Shenzhen,China', apiKey) {   
-
-        this.store = null;
-
         _privateProps.set(this, {
             key: apiKey,
             updateWeatherUI: (data, callback) => {
@@ -24,7 +18,7 @@ class Weather {
             }
         });
 
-        this.render = (payload) => {
+        this.render = payload => {
             let state = payload;
             if (!document.querySelector('#weatherIcon')) {
                 console.log('weather icon does not exist, lets makeone');

@@ -1,12 +1,5 @@
 import * as actions from './actionTypes';
 
-// export const coronaAdded = cases => ({
-//     type: actions.CORONA_ADDED,
-//     payload: {
-//         cases
-//     }
-// });
-
 export const coronaAdded = cases => {
     return {
         type: actions.CORONA_ADDED,
@@ -15,8 +8,6 @@ export const coronaAdded = cases => {
         }
     };
 }
-
-
 
 export const questionAdded = description => ({
     type: actions.QUESTION_ADDED,
@@ -38,4 +29,9 @@ export const weatherAdded = weatherData => ({
     payload: {
         description: weatherData
     }
+});
+
+export const newsAdded = newsData => ({
+    type: actions.NEWS_ADDED,
+    payload: newsData,
 });

@@ -205,3 +205,7 @@ body, #slider, .slide-content {
     overflow-y:scroll;
     -webkit-overflow-scrolling: touch;
   }
+
+  .borderRed {
+    border: 2px solid red;
+  }

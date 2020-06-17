@@ -7,14 +7,12 @@ import * as actions from './actionTypes';
 // called multiplb e times, given same arguments, free of side effects.
 // give same results
 
-
 export default function reducer(state = {}, action) {
     switch(action.type) {
-        case actions.WEATHER_ADDED:
+        case actions.NEWS_ADDED:
+            console.log('newsReducer.js', action.payload)
             return {
-                // action object gets passed in
-                
-                state: action.payload.description
+                state: action.payload.news
             }
         default:
                 return state;

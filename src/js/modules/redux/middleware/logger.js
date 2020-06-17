@@ -1,5 +1,6 @@
 import CoronaCases from '../../MyModules/CoronaCases/CoronaCases';
 import Weather from '../../MyModules/Weather/Weather';
+import News from '../../MyModules/News/index';
 
 // log every action that is dispatched
 
@@ -16,6 +17,11 @@ const logger = store => next => action => {
         Weather.render(action.payload.description);
     }
 
+    // then 2) gets to logger
+    if (action.type == "newsAdded") {
+        console.log('logger: ', action.payload);
+        News.render(action.payload);
+    }
     // Look at state users. Even though in index.js, we dispatched users,
     // those users didn't not end up in our state.
 
