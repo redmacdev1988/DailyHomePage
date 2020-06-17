@@ -51,7 +51,6 @@ let createEventHandlerForNewsBtn = btnID => {
                     _opened = false;
                 }
             }); 
-
         } else { // open it!
             gsap.to(newsBtn, {
                 duration: 1.0, 
@@ -104,9 +103,7 @@ let insertNewsIntoDOM = article => {
 
 }
 class News {
-    // initial function //
     constructor(keyword='Apple', apiKey) {   
-
         this.render = payload => {
             const { articles } = payload;
            
@@ -118,14 +115,11 @@ class News {
             articles.map(article => {
                 insertNewsIntoDOM(article);
             });
-            console.log('data inserted into DOM, present it');
 
-           // todo use gsap to animate the appearance
-           // grab all divs below ul.list-group, then make them appear
            gsap.to(ulEle, { // config obj
                 duration: 1.0,
                 opacity: 1.0,
-                ease:'back' // bounce, back
+                ease:'slow' // bounce, back
             });
         }
     }
