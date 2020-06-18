@@ -270,25 +270,15 @@ class CoronaCases {
                 let deathsInt = parseInt(noCommaDeaths);
                 totalDeaths += deathsInt;
             });
-
-            //debugger
-            console.log(`${totalCases} ${totalDeaths}`);
-
             deathsEle.innerHTML = `total deaths: ${totalDeaths}`;
             casesEle.innerHTML = `total cases: ${totalCases}`;
 
         }
 
         this.initEvents = () => {
-
             let div = document.querySelector('#CoronaVirusStats')
             let scrollbarWidth = div.offsetWidth - div.clientWidth;
-            console.log('scrollbarWidth', scrollbarWidth);
-
             let table = document.querySelector('#flagTable');
-            //debugger
-            
-
             _coronaVirusBckgndWidth = table.offsetWidth + scrollbarWidth;
             document.querySelector('#CoronaVirusStats').style.left = -1*_coronaVirusBckgndWidth + 'px';
             styleTriggerBtn();

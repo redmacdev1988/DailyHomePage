@@ -213,3 +213,18 @@ body, #slider, .slide-content {
   #NewsFeed ul.list-group {
     opacity: 0;
   }
+
+  #NewsFeed ul.list-group .list-group-item {
+    padding: 20px;
+  }
+
+  #NewsFeed .articleImg {
+    float:left;
+    /*width: 28%;*/
+  }
+
+  #NewsFeed .articleContent {
+    float: right;
+    /*width:70%;*/
+    margin-left: 5px;
+  }

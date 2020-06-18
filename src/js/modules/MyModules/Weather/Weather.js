@@ -21,7 +21,6 @@ class Weather {
         this.render = payload => {
             let state = payload;
             if (!document.querySelector('#weatherIcon')) {
-                console.log('weather icon does not exist, lets makeone');
                 var img = document.createElement('img'); 
                 img.id = 'weatherIcon';
                 img.src =  state.iconURL;
@@ -29,7 +28,6 @@ class Weather {
                 img.title = state.description;
                 document.getElementById('weather').appendChild(img);
             }
-            console.log('wather icon already exists, dont do anhything');
             document.getElementById('temp').innerHTML = state.degreeInCelcius + '&deg;';
             document.getElementById('location').innerHTML = state.cityName;
         }

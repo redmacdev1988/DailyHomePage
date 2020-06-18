@@ -116,8 +116,6 @@ class Carousel {
         }
 
         window.onresize = () => { 
-            console.log(`-- window resize --`);
-
             _screenWidth = window.innerWidth;
             var slides = document.getElementsByClassName('slide');  
             let _posInSlide = 0;
@@ -130,10 +128,8 @@ class Carousel {
                 stepsLeft--;
             }
         }
-
         _addRightArrowEventHandler.call(this);
-    } // constructo
-
+    } // construction
 }
 
 let ricky = (function() {
