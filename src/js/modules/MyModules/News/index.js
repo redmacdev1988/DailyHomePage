@@ -60,7 +60,6 @@ let createEventHandlerForNewsBtn = btnID => {
     newsBtn.addEventListener('click', () => {
         if (_opened) { //  close it
             GS_animateOpacityTo(ulEle, 0.0, 1.0, 'back', () => {
-                //removeChildrenOfElement(ulEle);
                 GS_animateRotateTo(newsBtn, 0, 1.0);
                 GS_animateVerticalTo(newsFeed, 960.0, 0.5, 'bound');
                 _opened = false;

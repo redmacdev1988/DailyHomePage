@@ -5,6 +5,8 @@ console.log(`src/js/index.js imported ${x} from ./test varialbe num is ${num}`);
 import store from './modules/redux/store';
 import { weatherAdded, coronaAdded, newsAdded } from './modules/redux/actions';
 
+import fetchWeather from './modules/MyModules/Weather/fetchWeather';
+import logicWeather from './modules/MyModules/Weather/logicWeather';
 
 // News module
 import News from './modules/MyModules/News/index';
@@ -15,18 +17,19 @@ import ExchangeRate from './modules/MyModules/ExchangeRates/ExchangeRates';
 
 // Weather module
 import Weather from './modules/MyModules/Weather/Weather';
-Weather.store = store;
-Weather.fetchWeatherData(function() {
-    console.log('fetched weather data, and dispatching to redux store');
+
+export const weather = new Weather(fetchWeather, logicWeather, data => {
+    console.log('data', data);
     store.dispatch(
         weatherAdded({
-            iconURL: Weather.iconURL,
-            cityName: Weather.cityName,
-            degreeInCelcius: Weather.degreeInCelcius,
-            description: Weather.weatherDescription
+            iconURL: data.iconURL,
+            cityName: data.cityName,
+            degreeInCelcius: data.degreeInCelcius,
+            description: data.weatherDescription
         })
     );
 });
+
 
 // Carousel module
 import Carousel from './modules/MyModules/Carousel/Carousel.js'; 

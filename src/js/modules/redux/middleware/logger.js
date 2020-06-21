@@ -2,6 +2,7 @@ import CoronaCases from '../../MyModules/CoronaCases/CoronaCases';
 import Weather from '../../MyModules/Weather/Weather';
 import News from '../../MyModules/News/index';
 
+import { weather } from '../../../index';
 // log every action that is dispatched
 
 // sna - store, next, action
@@ -14,7 +15,7 @@ const logger = store => next => action => {
     }
 
     if (action.type == "weatherAdded") {
-        Weather.render(action.payload.description);
+        weather.render(action.payload.description);
     }
 
     // then 2) gets to logger
